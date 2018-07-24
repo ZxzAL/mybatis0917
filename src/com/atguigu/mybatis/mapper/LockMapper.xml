@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+<mapper namespace="com.atguigu.mybatis.mapper.LockMapper">
+	
+	<!-- 
+	  association：用于1:1关联查询
+	  javaType：对象属性的完整类型，建议包名+类名
+	  property：entity对象的属性名称
+	  column：对应数据库表的字段
+	
+	<resultMap id="LockResultMap" type="com.atguigu.mybatis.entities.Lock">
+		<id property="id" column="id"/>
+		<result property="lockName" column="lockName"/>
+		<association property="key" javaType="com.atguigu.mybatis.entities.Key">
+			<id property="id" column="id"/>
+			<result property="keyName" column="keyName"/>
+		</association>
+	</resultMap>
+	<select id="getLockById" parameterType="Integer" resultMap="LockResultMap" >
+		SELECT * FROM tbl_key,tbl_lock 
+		WHERE tbl_key.id = tbl_lock.key_id 
+		AND tbl_lock.id=#{id}
+	</select>
+	 -->
+	 
+	<resultMap id="LockResultMap" type="com.atguigu.mybatis.entities.Lock">
+		<id property="id" 			column="id"/>
+		<result property="lockName" column="lockName"/>
+		<association property="key" column="key_id" select="com.atguigu.mybatis.mapper.KeyMapper.getKeyById"/>
+	</resultMap>	 
+	<select id="getLockById" parameterType="Integer" resultMap="LockResultMap" >
+		SELECT * FROM tbl_lock where id=#{id} 
+	</select>	 
+
+</mapper>

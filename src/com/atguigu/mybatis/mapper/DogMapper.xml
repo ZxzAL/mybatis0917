@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+<mapper namespace="com.atguigu.mybatis.mapper.DogMapper">
+	
+	<!-- 
+	<select id="getDogByName" parameterType="String" resultType="Dog">
+		select 	id as id,
+				dog_Name as dogName,
+				dog_Weight as dogWeight
+		from tbl_dog where dog_Name like #{dogName}
+	</select>
+	 -->
+	
+	<resultMap type="Dog" id="DogResultMap">
+		<id property="id" column="id"/>
+		<result property="dogName" column="dog_Name"/>
+		<result property="dogWeight" column="dog_Weight"/>
+	</resultMap>
+	<select id="getDogByName" parameterType="String" resultMap="DogResultMap">
+		select * from tbl_dog where dog_Name like #{dogName}
+	</select>	
+	
+	
+</mapper>

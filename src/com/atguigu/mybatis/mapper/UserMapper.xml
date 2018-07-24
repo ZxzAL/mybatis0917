@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.atguigu.mybatis.mapper.UserMapper">
+	
+	<!--  -->
+	<cache  eviction="FIFO"  flushInterval="60000"  size="512"  readOnly="true"/>
+	
+	<!-- mybatis和ehcache结合
+ 	<cache type="org.mybatis.caches.ehcache.EhcacheCache"></cache>-->
+
+	<select id="getUserById" parameterType="Integer" resultType="User">
+		select * from tbl_user where id=#{id}
+	</select>
+
+	<update id="updateUser" parameterType="User">
+		update tbl_user 
+		set name=#{name},age=#{age} 
+		where id=#{id}
+	</update>
+
+</mapper>
